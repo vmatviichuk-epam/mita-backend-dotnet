@@ -1,0 +1,12 @@
+namespace Mita.Models;
+
+public class ErrorResponse
+{
+    public ErrorDetail Error { get; set; } = null!;
+}
+
+public class ErrorDetail
+{
+    public string Code { get; set; } = string.Empty;
+    public string Message { get; set; } = string.Empty;
+}
