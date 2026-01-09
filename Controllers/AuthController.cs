@@ -7,6 +7,13 @@ namespace Mita.Controllers;
 [Route("api/auth")]
 public class AuthController : ControllerBase
 {
+    private readonly ILogger<AuthController> _logger;
+
+    public AuthController(ILogger<AuthController> logger)
+    {
+        _logger = logger;
+    }
+
     /// <summary>
     /// Login endpoint - returns mock JWT token.
     /// TODO: Implement real authentication with database lookup and JWT generation
@@ -14,6 +21,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public ActionResult<LoginResponse> Login([FromBody] LoginRequest request)
     {
+        _logger.LogInformation("Login attempt for user: {Username}", request.Username);
         // Validate request
         if (string.IsNullOrWhiteSpace(request.Username) || string.IsNullOrWhiteSpace(request.Password))
         {
